@@ -1,0 +1,2 @@
+cliente.zip filter=lfs diff=lfs merge=lfs -text
+git-lfs-3.3.0 filter=lfs diff=lfs merge=lfs -text

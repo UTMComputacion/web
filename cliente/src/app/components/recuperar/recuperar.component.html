@@ -1,0 +1,13 @@
+
+
+<div class="container">
+    <div class="input-field">
+        <label for="">Contraseña nueva</label>
+        <input type="password" [(ngModel)]="usuario1.password">
+    </div>
+    <div class="input-field">
+        <label for="">Repetir Contraseña</label>
+        <input type="password" [(ngModel)]="usuario2.password">
+    </div>
+    <button   (click)="enviarContrasenia()">Actualizar</button>
+</div>
