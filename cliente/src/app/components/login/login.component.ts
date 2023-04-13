@@ -17,10 +17,10 @@ export class LoginComponent {
   //creamos la varible
   liga: string = environment.API_URI_IMAGENES;
   imgPrincipal: any;
-  fileToUpload : any;
+  fileToUpload: any;
   usuario = new Usuario();
-  constructor(private imagenesService:ImagenesService,private correoService: CorreoService, private usuarioService: UsuarioService, private router: Router) {
-    this.imgPrincipal = null  
+  constructor(private imagenesService: ImagenesService, private correoService: CorreoService, private usuarioService: UsuarioService, private router: Router) {
+    this.imgPrincipal = null
   }
   modalCambiarContrasenya() {
     console.log("modalCambiarContrasenya");
@@ -34,43 +34,41 @@ export class LoginComponent {
       console.log(resUsuario);
     }, (err: any) => console.error(err));
   }
-  cargandoImagen(files:any,carpeta:any){
+  cargandoImagen(files: any, carpeta: any) {
     console.log(files.files[0]);
-    
-    this.imgPrincipal=null;
+
+    this.imgPrincipal = null;
     this.fileToUpload = files.files[0];
     let imgPromise = this.getFileBlob(this.fileToUpload);
     imgPromise.then(blob => {
       console.log(blob);
-      
-    this.imagenesService.guardarImagen(345, blob,carpeta).subscribe(
-    (res: any) =>
-    {
-    this.imgPrincipal = blob;
-    },
-    err => console.error(err));
-    })    
+
+      this.imagenesService.guardarImagen(345, blob, carpeta).subscribe(
+        (res: any) => {
+          this.imgPrincipal = blob;
+        },
+        err => console.error(err));
+    })
   }
-  getFileBlob(file:any)
-{
-var reader = new FileReader();
-return new Promise(function (resolve, reject) {
-reader.onload = (function (thefile) {
-return function (e:any) {
-resolve(e.target.result);
-};
-})(file);
-reader.readAsDataURL(file);
-});
-}
-dameNombre(id:any){
-  console.log("hola");
-  
-  return this.liga+"/perfil/"+id+".jpg"
-}
-onImgError(event:any){
-  event.target.src=this.liga+"/perfil/0.png";
-}
+  getFileBlob(file: any) {
+    var reader = new FileReader();
+    return new Promise(function (resolve, reject) {
+      reader.onload = (function (thefile) {
+        return function (e: any) {
+          resolve(e.target.result);
+        };
+      })(file);
+      reader.readAsDataURL(file);
+    });
+  }
+  dameNombre(id: any) {
+    console.log("hola");
+
+    return this.liga + "/perfil/" + id + ".jpg"
+  }
+  onImgError(event: any) {
+    event.target.src = this.liga + "/perfil/0.png";
+  }
   verificarUsuario() {
 
     this.usuarioService.VerificarUsuario(this.usuario.correo, this.usuario.password).subscribe((resUsuario: any) => {
